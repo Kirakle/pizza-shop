@@ -1,6 +1,7 @@
-import Header from './components/Header/Header';
+import { Header, Categories } from './components/index'
 
 function App() {
+    let categories = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
     return (
         <div className="wrapper">
             <Header />
@@ -8,14 +9,7 @@ function App() {
                 <div className="container">
                     <div className="content__top">
                         <div className="categories">
-                            <ul>
-                                <li className="active">Все</li>
-                                <li>Мясные</li>
-                                <li>Вегетарианская</li>
-                                <li>Гриль</li>
-                                <li>Острые</li>
-                                <li>Закрытые</li>
-                            </ul>
+                            <Categories categories={categories} />
                         </div>
                         <div className="sort">
                             <div className="sort__label">
