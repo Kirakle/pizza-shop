@@ -48,6 +48,10 @@
           border-radius: 5px;
           cursor: auto;
         }
+        &.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+          }
       }
     }
   }
@@ -65,4 +69,5 @@
     line-height: 27px;
     letter-spacing: 0.015em;
   }
+
 }
