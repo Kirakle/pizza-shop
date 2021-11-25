@@ -1,0 +1,28 @@
+@media (max-width: 1305px) {
+    .header .container {
+        display : flex;
+        flex-wrap: wrap;
+
+    }
+
+    .categories ul  {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .categories li {
+        margin: 5px;
+    }
+
+
+}
+
+@media (max-width: 560px) {
+   .container .content__top {
+        display: block;
+    }
+    .container .content__top .sort {
+            margin-top: 10px;
+    }
+
+}
