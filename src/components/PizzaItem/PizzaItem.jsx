@@ -17,10 +17,10 @@ function PizzaItem({ id, imageUrl, name, types, sizes, price, category, rating }
             <h4 className="pizza-block__title">{name}</h4>
             <div className="pizza-block__selector">
                 <ul>
-                    {type.map((item, index) => <li className={classNames({ active: (index === selectedType) }, { disabled: (!types.includes(index)) })} onClick={() => { if (types.includes(index)) setSelectedType(index) }}  >{item}</li>)}
+                    {type.map((item, index) => <li key={`${item}_${index}`} className={classNames({ active: (index === selectedType) }, { disabled: (!types.includes(index)) })} onClick={() => { if (types.includes(index)) setSelectedType(index) }}  >{item}</li>)}
                 </ul>
                 <ul>
-                    {size.map(item => <li className={classNames({ active: (item === selectedSize) }, { disabled: (!sizes.includes(item)) })} onClick={() => { if (sizes.includes(item)) setSelectedSize(item) }} >{`${item} см`}</li>)}
+                    {size.map((item, index) => <li key={`${item}_${index}`} className={classNames({ active: (item === selectedSize) }, { disabled: (!sizes.includes(item)) })} onClick={() => { if (sizes.includes(item)) setSelectedSize(item) }} >{`${item} см`}</li>)}
                 </ul>
             </div>
             <div className="pizza-block__bottom">

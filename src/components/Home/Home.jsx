@@ -2,7 +2,6 @@ import React from 'react'
 import { Categories, Sort, PizzaItem } from '../index'
 
 function Home({ pizzas }) {
-    console.log(pizzas)
     let categories = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
     let sortType = ['популярности', 'цене', 'алфавиту'];
     return (
