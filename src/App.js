@@ -1,15 +1,17 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router';
 
 import { Header, Home, Cart } from './components/index'
+import { setPizzas } from './redux/store';
 
 function App() {
-    const [pizzas, setPizzas] = useState([]);
+    const dispatch = useDispatch();
 
-    let getData = async () => {
+    const getData = async () => {
         let result = await axios.get('http://localhost:3000/db.json');
-        setPizzas(result.data.pizzas);
+        dispatch(setPizzas(result.data.pizzas));
     }
 
     useEffect(() => {
@@ -20,7 +22,7 @@ function App() {
         <div className="wrapper">
             <Header />
             <Routes>
-                <Route path="/" element={<Home pizzas={pizzas} />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/cart" element={<Cart />} />
             </Routes>
         </div>

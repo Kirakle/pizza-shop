@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-
-function Categories({ categories }) {
+function Categories({ categories, onClickCategory }) {
     const [selectedCategory, setSelectedCategory] = useState(null);
     return (
         <div className="categories">

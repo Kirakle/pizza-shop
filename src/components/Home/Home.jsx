@@ -1,14 +1,17 @@
 import React from 'react'
-import { Categories, Sort, PizzaItem } from '../index'
+import { useSelector } from 'react-redux';
 
-function Home({ pizzas }) {
-    let categories = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
-    let sortType = ['популярности', 'цене', 'алфавиту'];
+import { Categories, Sort, PizzaItem } from '../index';
+
+function Home() {
+    const pizzas = useSelector(state => state.allPizzas.items);
+    const categories = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
+    const sortType = ['популярности', 'цене', 'алфавиту'];
     return (
         <div className="content">
             <div className="container">
                 <div className="content__top">
-                    <Categories categories={categories} />
+                    <Categories onClickCategory={(id) => console.log(id)} categories={categories} />
                     <Sort sortType={sortType} />
                 </div>
                 <h2 className="content__title">Все пиццы</h2>

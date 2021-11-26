@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 
 
 const Sort = ({ sortType }) => {
     const [sortPopup, setSortPopup] = useState(false);
     const [sortOption, setSortOption] = useState(0);
     const sort = useRef();
+
+    const sortBy = useSelector(state => state.filterMenu.sortBy)
 
     const handlerClick = (e) => {
         if (!e.path.includes(sort.current)) setSortPopup(false);
