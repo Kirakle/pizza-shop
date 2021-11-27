@@ -10,7 +10,7 @@ const filterSlice = createSlice({
         changeFilters(state, action) {
             state.sortBy = action.payload;
         },
-        setCategry(state, action) {
+        setCategory(state, action) {
             state.category = action.payload;
         },
     }
@@ -33,7 +33,7 @@ const pizzasSlice = createSlice({
 })
 
 
-export const { changeFilters } = filterSlice.actions;
+export const { changeFilters, setCategory } = filterSlice.actions;
 export const { setPizzas } = pizzasSlice.actions;
 
 

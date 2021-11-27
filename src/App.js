@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router';
 
@@ -10,11 +10,11 @@ function App() {
     const dispatch = useDispatch();
 
     const getData = async () => {
-        let result = await axios.get('http://localhost:3000/db.json');
-        dispatch(setPizzas(result.data.pizzas));
+        let result = await axios.get('http://localhost:3001/pizzas');
+        dispatch(setPizzas(result.data));
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         getData();
     }, [])
 

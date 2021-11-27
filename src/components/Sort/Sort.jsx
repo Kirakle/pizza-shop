@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 
 
-const Sort = ({ sortType }) => {
-    const [sortPopup, setSortPopup] = useState(false);
-    const [sortOption, setSortOption] = useState(0);
-    const sort = useRef();
+const Sort = React.memo(({ sortType }) => {
+    const [sortPopup, setSortPopup] = React.useState(false);
+    const [sortOption, setSortOption] = React.useState(0);
+    const sort = React.useRef();
 
     const sortBy = useSelector(state => state.filterMenu.sortBy)
 
@@ -14,7 +14,7 @@ const Sort = ({ sortType }) => {
 
     }
 
-    useEffect(() => { document.body.addEventListener('click', handlerClick) }, [])
+    React.useEffect(() => { document.body.addEventListener('click', handlerClick) }, [])
 
     return (
         <div ref={sort} className="sort">
@@ -42,5 +42,6 @@ const Sort = ({ sortType }) => {
         </div >
     )
 }
+);
 
 export default Sort;
