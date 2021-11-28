@@ -1,13 +1,15 @@
 import classNames from 'classnames';
-import React, { useState } from 'react'
+import React from 'react'
 
 
 function PizzaItem({ id, imageUrl, name, types, sizes, price, category, rating }) {
+
     const size = [26, 30, 40];
-    const [selectedSize, setSelectedSize] = useState(sizes[0]);
+    const [selectedSize, setSelectedSize] = React.useState(sizes[0]);
     const type = ['тонкое', 'традиционное'];
-    const [selectedType, setSelectedType] = useState(types[0]);
+    const [selectedType, setSelectedType] = React.useState(types[0]);
     return (
+
         <div className="pizza-block">
             <img
                 className="pizza-block__image"

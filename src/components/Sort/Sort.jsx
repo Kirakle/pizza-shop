@@ -2,12 +2,12 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 
-const Sort = React.memo(({ sortType }) => {
+
+
+const Sort = React.memo(({ sortType, changeFilters, sortBy }) => {
     const [sortPopup, setSortPopup] = React.useState(false);
-    const [sortOption, setSortOption] = React.useState(0);
     const sort = React.useRef();
 
-    const sortBy = useSelector(state => state.filterMenu.sortBy)
 
     const handlerClick = (e) => {
         if (!e.path.includes(sort.current)) setSortPopup(false);
@@ -32,11 +32,11 @@ const Sort = React.memo(({ sortType }) => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => setSortPopup(!sortPopup)}>{sortType[sortOption]}</span>
+                <span onClick={() => setSortPopup(!sortPopup)}>{sortType[sortBy]}</span>
             </div>
             {sortPopup && <div className="sort__popup">
                 <ul>
-                    {sortType.map((item, index) => <li onClick={() => { setSortOption(index); setSortPopup(false); }} className={(index === sortOption) ? 'active' : null} key={`${item}_${index}`}>{item}</li>)}
+                    {sortType.map((item, index) => <li onClick={() => { changeFilters(index); setSortPopup(false); }} className={(index === sortBy) ? 'active' : null} key={`${item}_${index}`}>{item}</li>)}
                 </ul>
             </div>}
         </div >
