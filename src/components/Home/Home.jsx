@@ -1,12 +1,11 @@
 import React from 'react'
-
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setCategory } from '../../redux/store';
+import { setCategory, fetchPizzas, changeFilters, addPizza } from '../../redux/store';
 
 
 import { Categories, Sort, PizzaItem, LoadingBlock } from '../index';
-import { fetchPizzas, changeFilters } from '../../redux/store';
+
 
 
 const categories = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
@@ -25,6 +24,8 @@ function Home() {
     React.useEffect(() => {
         dispatch(fetchPizzas({ category, sortBy }));
     }, [category, sortBy])
+
+
 
     return (
         <div className="content">

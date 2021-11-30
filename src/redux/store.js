@@ -12,7 +12,6 @@ export const fetchPizzas = createAsyncThunk(
         }
         let result = await axios.get(`http://localhost:3001/pizzas?${category}&_sort=${sortType[data.sortBy]}&_order=asc`);
         dispatch(setPizzas(result.data));
-        console.log(data)
     })
 
 
@@ -34,6 +33,25 @@ const filterSlice = createSlice({
 
 
 export const { filters } = filterSlice.actions;
+
+const CartSlice = createSlice({
+    name: 'cart',
+    initialState: {
+        value: {},
+        itemsCount: 0,
+        totalPrice: 0,
+    },
+    reducers: {
+        addPizza(state, action) {
+            if (state.value[action.payload.id] === undefined) state.value[action.payload.id] = [];
+            state.value[action.payload.id].push({ ...action.payload })
+            state.totalPrice += action.payload.price;
+            state.itemsCount++;
+        },
+    }
+})
+
+export const { addPizza } = CartSlice.actions;
 
 const pizzasSlice = createSlice({
     name: 'pizzas',
@@ -64,6 +82,7 @@ export default configureStore({
     reducer: {
         allPizzas: pizzasSlice.reducer,
         filterMenu: filterSlice.reducer,
+        cart: CartSlice.reducer,
     }
 })
 

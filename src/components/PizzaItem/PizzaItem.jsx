@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import React from 'react'
+import { Button } from '../index';
 
-
-function PizzaItem({ id, imageUrl, name, types, sizes, price, category, rating }) {
+function PizzaItem({ id, imageUrl, name, types, sizes, price }) {
 
     const size = [26, 30, 40];
     const [selectedSize, setSelectedSize] = React.useState(sizes[0]);
@@ -27,7 +27,7 @@ function PizzaItem({ id, imageUrl, name, types, sizes, price, category, rating }
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {price} ₽</div>
-                <div className="button button--outline button--add">
+                <Button className={classNames('button--add', 'button--outline')}>
                     <svg
                         width="12"
                         height="12"
@@ -40,9 +40,9 @@ function PizzaItem({ id, imageUrl, name, types, sizes, price, category, rating }
                             fill="white"
                         />
                     </svg>
-                    <span>Добавить</span>
+                    <span >Добавить</span>
                     <i>2</i>
-                </div>
+                </Button>
             </div>
         </div>
     )
