@@ -10,7 +10,7 @@ export const fetchPizzas = createAsyncThunk(
         if (data.category != null) {
             category = `category=${data.category}`;
         }
-        let result = await axios.get(`http://localhost:3001/pizzas?${category}&_sort=${sortType[data.sortBy]}&_order=asc`);
+        let result = await axios.get(`http://localhost:3000/pizzas?${category}&_sort=${sortType[data.sortBy]}&_order=asc`);
         dispatch(setPizzas(result.data));
     })
 
