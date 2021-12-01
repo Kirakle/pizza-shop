@@ -17,6 +17,7 @@ function PizzaItem({ id, imageUrl, name, types, sizes, price, onClickAddPizza, c
             price,
             type: type[selectedType],
             size: selectedSize,
+            count: 1,
         }
         onClickAddPizza(pizzaItem);
     }

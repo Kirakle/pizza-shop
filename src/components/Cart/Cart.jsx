@@ -5,8 +5,12 @@ import { PizzaCartItem } from '..'
 
 
 function Cart() {
-    const cart = useSelector(({ cart }) => cart);
-    console.log(cart)
+    const {totalPrice, value, itemsCount} = useSelector(({ cart }) => cart);
+    const pizzasId = Object.keys(value);
+    const PizzaCartArr = [];
+    for (let i = 0; i < pizzasId.length; i++) {
+        Object.values(value[pizzasId[i]]).forEach(item => PizzaCartArr.push(item))
+    }
     return (
         <div className="content">
             <div className="container container--cart">
@@ -30,12 +34,12 @@ function Cart() {
                         </div>
                     </div>
                     <div className="content__items">
-                        {Object.values(cart.value).map(item => < PizzaCartItem name={item.name} imageUrl={item.imageUrl} price={item.price} size={item.size} type={item.type} />)}
+                        {PizzaCartArr.map(item => < PizzaCartItem key={item.id} name={item.name} imageUrl={item.imageUrl} price={item.price} size={item.size} type={item.type} />)}
                     </div>
                     <div className="cart__bottom">
                         <div className="cart__bottom-details">
-                            <span> Всего пицц: <b>3 шт.</b> </span>
-                            <span> Сумма заказа: <b>900 ₽</b> </span>
+                            <span> Всего пицц: <b>{itemsCount} шт.</b> </span>
+                            <span> Сумма заказа: <b>{totalPrice} ₽</b> </span>
                         </div>
                         <div className="cart__bottom-buttons">
                             <a href="/" className="button button--outline button--add go-back-btn">

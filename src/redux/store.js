@@ -43,8 +43,11 @@ const CartSlice = createSlice({
     },
     reducers: {
         addPizza(state, action) {
-            if (state.value[action.payload.id] === undefined) state.value[action.payload.id] = [];
-            state.value[action.payload.id].push({ ...action.payload })
+            if (state.value[action.payload.id] === undefined) state.value[action.payload.id] = { items: [] };
+            if (state.value[action.payload.id].items.filter(item => { if (item.id == action.payload.id && item.type == action.payload.type && item.size == action.payload.size) return true }).length != 0) {
+                state.value[action.payload.id].items.map(item => {if (item.id == action.payload.id && item.type == action.payload.type && item.size == action.payload.size) { return ++item.count } return item });
+            }
+            else state.value[action.payload.id].items.push({ ...action.payload })
             state.totalPrice += action.payload.price;
             state.itemsCount++;
         },
