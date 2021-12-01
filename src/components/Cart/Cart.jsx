@@ -5,11 +5,11 @@ import { PizzaCartItem } from '..'
 
 
 function Cart() {
-    const {totalPrice, value, itemsCount} = useSelector(({ cart }) => cart);
+    const { totalPrice, value, itemsCount } = useSelector(({ cart }) => cart);
     const pizzasId = Object.keys(value);
     const PizzaCartArr = [];
     for (let i = 0; i < pizzasId.length; i++) {
-        Object.values(value[pizzasId[i]]).forEach(item => PizzaCartArr.push(item))
+        value[pizzasId[i]].items.forEach(item => PizzaCartArr.push(item))
     }
     return (
         <div className="content">
@@ -34,7 +34,7 @@ function Cart() {
                         </div>
                     </div>
                     <div className="content__items">
-                        {PizzaCartArr.map(item => < PizzaCartItem key={item.id} name={item.name} imageUrl={item.imageUrl} price={item.price} size={item.size} type={item.type} />)}
+                        {PizzaCartArr.map(item => < PizzaCartItem key={item.id} count={item.count} name={item.name} imageUrl={item.imageUrl} price={item.price} size={item.size} type={item.type} />)}
                     </div>
                     <div className="cart__bottom">
                         <div className="cart__bottom-details">

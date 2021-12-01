@@ -18,7 +18,6 @@ function Home() {
     const isFetch = useSelector(state => state.allPizzas.isLoaded);
     const pizzas = useSelector(state => state.allPizzas.items);
     const cartItems = useSelector(({ cart }) => cart.value);
-
     const onSelectCategory = React.useCallback((id) => dispatch(setCategory(id)), []);
     const onSelectFilters = React.useCallback((typeSort) => dispatch(changeFilters(typeSort)), []);
     const addPizzas = React.useCallback((obj) => dispatch(addPizza(obj)), []);
@@ -38,7 +37,7 @@ function Home() {
                 </div>
                 <h2 className="content__title">Все пиццы</h2>
                 <div className="content__items">
-                    {!isFetch ? pizzas.map(item => <PizzaItem key={item.id} {...item} onClickAddPizza={addPizzas} countInCart={Object.keys(cartItems).filter(el => el == item.id).length && cartItems[item.id].length} />) : Array(12).fill(0).map((item, index) => <LoadingBlock key={index} />)}
+                    {!isFetch ? pizzas.map(item => <PizzaItem key={item.id} {...item} countInCart={cartItems[item.id] && cartItems[item.id].totalCount} onClickAddPizza={addPizzas} />) : Array(12).fill(0).map((item, index) => <LoadingBlock key={index} />)}
                 </div>
             </div>
         </div>
@@ -46,3 +45,7 @@ function Home() {
 }
 
 export default Home
+
+
+
+// countInCart={arr.filter(el => { console.log(el); return el.items.id == item.id }).length}
