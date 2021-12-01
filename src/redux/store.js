@@ -49,7 +49,19 @@ const CartSlice = createSlice({
                 state.value[action.payload.id].totalCount++;
             }
             else {
-                state.value[action.payload.id].items.push({ ...action.payload });
+                switch (action.payload.size) {
+                    case 30:
+                        state.value[action.payload.id].items.push({ ...action.payload, price: action.payload.price * 1.2 });
+                        break;
+
+                    case 40:
+                        state.value[action.payload.id].items.push({ ...action.payload, price: action.payload.price * 1.5 });
+                        break;
+                    default:
+                        state.value[action.payload.id].items.push({ ...action.payload });
+                        break;
+                }
+
                 state.value[action.payload.id].totalCount++;
             }
 
