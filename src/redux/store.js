@@ -51,11 +51,11 @@ const CartSlice = createSlice({
             else {
                 switch (action.payload.size) {
                     case 30:
-                        state.value[action.payload.id].items.push({ ...action.payload, price: action.payload.price * 1.2 });
+                        state.value[action.payload.id].items.push({ ...action.payload, price: Math.ceil(action.payload.price * 1.2) });
                         break;
 
                     case 40:
-                        state.value[action.payload.id].items.push({ ...action.payload, price: action.payload.price * 1.5 });
+                        state.value[action.payload.id].items.push({ ...action.payload, price: Math.ceil(action.payload.price * 1.5) });
                         break;
                     default:
                         state.value[action.payload.id].items.push({ ...action.payload });
@@ -64,8 +64,18 @@ const CartSlice = createSlice({
 
                 state.value[action.payload.id].totalCount++;
             }
+            switch (action.payload.size) {
+                case 30:
+                    state.totalPrice += Math.ceil(action.payload.price * 1.2);
+                    break;
+                case 40:
+                    state.totalPrice += Math.ceil(action.payload.price * 1.5);
+                    break;
 
-            state.totalPrice += action.payload.price;
+                default:
+                    state.totalPrice += Math.ceil(action.payload.price);
+                    break;
+            }
             state.itemsCount++;
         },
         clearCart(state) {
@@ -85,10 +95,19 @@ const CartSlice = createSlice({
             state.totalPrice -= action.payload.price;
             state.itemsCount--;
         },
+        deleteAllPizza(state, action) {
+            if (state.value[action.payload.id].items.filter(item => { if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size && item.count > 0) return true }).length !== 0) {
+                state.value[action.payload.id].items.map(item => { if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size) { state.totalPrice -= Math.ceil(item.price * (item.count)); state.itemsCount -= item.count; return item.count = 0 } return item });
+                state.value[action.payload.id].totalCount--;
+            }
+            if (state.value[action.payload.id].items.filter(item => { if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size && item.count === 0) return true }).length !== 0) {
+                state.value[action.payload.id].items = state.value[action.payload.id].items.filter(item => { if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size) { return false }; return true })
+            }
+        },
     }
 })
 
-export const { addPizza, clearCart, deletePizza } = CartSlice.actions;
+export const { addPizza, clearCart, deletePizza, deleteAllPizza } = CartSlice.actions;
 
 const pizzasSlice = createSlice({
     name: 'pizzas',

@@ -56,7 +56,7 @@ function PizzaItem({ id, imageUrl, name, types, sizes, price, onClickAddPizza, c
                             />
                         </svg>
                         <span >Добавить</span>
-                        {(countInCart === undefined) ? null : <i>{countInCart}</i>}
+                        {(countInCart === undefined||countInCart === 0) ? null : <i>{countInCart}</i>}
                     </Button>
                 </div>
             </div>

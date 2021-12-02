@@ -1,8 +1,9 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react';
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 
-import { PizzaCartItem } from '..'
-import { clearCart, addPizza, deletePizza } from '../../redux/store';
+import { PizzaCartItem } from '..';
+import { clearCart, addPizza, deletePizza, deleteAllPizza } from '../../redux/store';
 
 
 function Cart() {
@@ -24,6 +25,10 @@ function Cart() {
 
     const deletePizzaFromCart = (pizza) => {
         dispatch(deletePizza(pizza));
+    }
+
+    const deletePizzasAll = (pizza) => {
+        dispatch(deleteAllPizza(pizza))
     }
     return (
         <div className="content">
@@ -48,7 +53,7 @@ function Cart() {
                         </div>
                     </div>
                     <div className="content__items">
-                        {PizzaCartArr.map((item, index) => < PizzaCartItem key={`${item.id}_${index}`} id={item.id} count={item.count} name={item.name} imageUrl={item.imageUrl} price={item.price} size={item.size} type={item.type} addPizzaToCart={addPizzaToCart} deletePizzaFromCart={deletePizzaFromCart} />)}
+                        {PizzaCartArr.map((item, index) => < PizzaCartItem key={`${item.id}_${index}`} id={item.id} count={item.count} name={item.name} imageUrl={item.imageUrl} price={item.price} size={item.size} type={item.type} addPizzaToCart={addPizzaToCart} deletePizzasAll={deletePizzasAll} deletePizzaFromCart={deletePizzaFromCart} />)}
                     </div>
                     <div className="cart__bottom">
                         <div className="cart__bottom-details">
@@ -61,7 +66,7 @@ function Cart() {
                                     <path d="M7 13L1 6.93015L6.86175 1" stroke="#D3D3D3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
 
-                                <span>Вернуться назад</span>
+                                <Link to="/" ><span>Вернуться назад</span></Link>
                             </a>
                             <div className="button pay-btn">
                                 <span>Оплатить сейчас</span>
