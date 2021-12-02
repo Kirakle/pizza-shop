@@ -40,7 +40,7 @@ function PizzaItem({ id, imageUrl, name, types, sizes, price, onClickAddPizza, c
                 </ul>
             </div>
             <div className="pizza-block__bottom">
-                <div className="pizza-block__price"> {(selectedSize == 26 && price) || (selectedSize == 30 && price*1.2) || (selectedSize == 40 && price*1.5)} ₽</div>
+                <div className="pizza-block__price"> {(selectedSize == 26 && price) || (selectedSize == 30 && Math.ceil(price * 1.2)) || (selectedSize == 40 && Math.ceil(price * 1.5))} ₽</div>
                 <div onClick={addPizza}>
                     <Button className={classNames('button--add', 'button--outline')}>
                         <svg

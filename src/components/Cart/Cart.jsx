@@ -1,15 +1,29 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { PizzaCartItem } from '..'
+import { clearCart, addPizza, deletePizza } from '../../redux/store';
 
 
 function Cart() {
     const { totalPrice, value, itemsCount } = useSelector(({ cart }) => cart);
+    const dispatch = useDispatch();
     const pizzasId = Object.keys(value);
     const PizzaCartArr = [];
     for (let i = 0; i < pizzasId.length; i++) {
         value[pizzasId[i]].items.forEach(item => PizzaCartArr.push(item))
+    }
+
+    const clearAllCart = () => {
+        dispatch(clearCart());
+    }
+
+    const addPizzaToCart = (pizza) => {
+        dispatch(addPizza(pizza));
+    }
+
+    const deletePizzaFromCart = (pizza) => {
+        dispatch(deletePizza(pizza));
     }
     return (
         <div className="content">
@@ -30,11 +44,11 @@ function Cart() {
                                 <path d="M11.6666 9.16667V14.1667" stroke="#B6B6B6" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
 
-                            <span>Очистить корзину</span>
+                            <span onClick={clearAllCart} >Очистить корзину</span>
                         </div>
                     </div>
                     <div className="content__items">
-                        {PizzaCartArr.map(item => < PizzaCartItem key={item.id} count={item.count} name={item.name} imageUrl={item.imageUrl} price={item.price} size={item.size} type={item.type} />)}
+                        {PizzaCartArr.map((item, index) => < PizzaCartItem key={`${item.id}_${index}`} id={item.id} count={item.count} name={item.name} imageUrl={item.imageUrl} price={item.price} size={item.size} type={item.type} addPizzaToCart={addPizzaToCart} deletePizzaFromCart={deletePizzaFromCart} />)}
                     </div>
                     <div className="cart__bottom">
                         <div className="cart__bottom-details">
