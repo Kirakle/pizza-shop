@@ -1,10 +1,9 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setCategory, fetchPizzas, changeFilters, addPizza } from '../../redux/store';
+import { addPizza, fetchPizzas, setCategory, changeFilters } from '../../redux/linkage';
 
-
-import { Categories, Sort, PizzaItem, LoadingBlock } from '../index';
+import { Categories, Sort, PizzaItem, LoadingBlock } from '../linkage';
 
 
 

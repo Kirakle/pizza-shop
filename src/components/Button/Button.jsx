@@ -1,10 +1,10 @@
 import React from 'react';
 import classNames from "classnames";
 
-function Button({ className, children }) {
+function Button({ className, children, onClickButton }) {
     return (
-        <button className={classNames('button', className)} >{children}</button >
+        <button onClick={onClickButton} className={classNames('button', className)} >{children}</button >
     )
 }
 
-export default Button
+export default Button;

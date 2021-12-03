@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router';
 
-import { Header, Home, Cart } from './components/index'
+import { Header, Home, Cart } from './components/linkage';
 
 
 function App() {

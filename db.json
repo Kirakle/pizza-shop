@@ -126,7 +126,7 @@
                 40
             ],
             "price": 450,
-            "category": 4,
+            "category": 1,
             "rating": 10
         },
         {
@@ -162,6 +162,40 @@
             "price": 285,
             "category": 1,
             "rating": 7
+        },
+        {
+            "id": 10,
+            "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/67022619669c4ea28ffc5b3b9bd28877_292x292.jpeg",
+            "name": "Колбаски Барбекю",
+            "types": [
+                0,
+                1
+            ],
+            "sizes": [
+                26,
+                30,
+                40
+            ],
+            "price": 450,
+            "category": 2,
+            "rating": 3
+        },
+        {
+            "id": 11,
+            "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/4aec6cc08719404e94262698eb014cba_292x292.jpeg",
+            "name": "Гавайская",
+            "types": [
+                0,
+                1
+            ],
+            "sizes": [
+                26,
+                30,
+                40
+            ],
+            "price": 320,
+            "category": 4,
+            "rating": 3
         }
     ]
 }
