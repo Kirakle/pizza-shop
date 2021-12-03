@@ -44,38 +44,21 @@ const CartSlice = createSlice({
     reducers: {
         addPizza(state, action) {
             if (state.value[action.payload.id] === undefined) state.value[action.payload.id] = { items: [], totalCount: 0 };
-            if (state.value[action.payload.id].items.filter(item => { if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size) return true }).length !== 0) {
-                state.value[action.payload.id].items.map(item => { if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size) { return ++item.count } return item });
-                state.value[action.payload.id].totalCount++;
+            if (state.value[action.payload.id].items.filter(
+                item => {
+                    if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size) return true;
+                }).length !== 0) {
+                state.value[action.payload.id].items.map(
+                    item => {
+                        if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size) return ++item.count;
+                        return item;
+                    });
             }
             else {
-                switch (action.payload.size) {
-                    case 30:
-                        state.value[action.payload.id].items.push({ ...action.payload, price: Math.ceil(action.payload.price * 1.2) });
-                        break;
-
-                    case 40:
-                        state.value[action.payload.id].items.push({ ...action.payload, price: Math.ceil(action.payload.price * 1.5) });
-                        break;
-                    default:
-                        state.value[action.payload.id].items.push({ ...action.payload });
-                        break;
-                }
-
-                state.value[action.payload.id].totalCount++;
+                state.value[action.payload.id].items.push({ ...action.payload });
             }
-            switch (action.payload.size) {
-                case 30:
-                    state.totalPrice += Math.ceil(action.payload.price * 1.2);
-                    break;
-                case 40:
-                    state.totalPrice += Math.ceil(action.payload.price * 1.5);
-                    break;
-
-                default:
-                    state.totalPrice += Math.ceil(action.payload.price);
-                    break;
-            }
+            state.value[action.payload.id].totalCount++;
+            state.totalPrice += action.payload.price;
             state.itemsCount++;
         },
         clearCart(state) {
@@ -84,24 +67,53 @@ const CartSlice = createSlice({
             state.totalPrice = 0;
         },
         deletePizza(state, action) {
-            if (state.value[action.payload.id].items.filter(item => { if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size && item.count > 0) return true }).length !== 0) {
-                state.value[action.payload.id].items.map(item => { if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size) { return --item.count } return item });
+            if (state.value[action.payload.id].items.filter(
+                item => {
+                    if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size && item.count > 0) return true;
+                }).length !== 0) {
+                state.value[action.payload.id].items.map(
+                    item => {
+                        if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size) return --item.count;
+                        return item;
+                    });
                 state.value[action.payload.id].totalCount--;
             }
-            if (state.value[action.payload.id].items.filter(item => { if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size && item.count === 0) return true }).length !== 0) {
-                state.value[action.payload.id].items = state.value[action.payload.id].items.filter(item => { if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size) { return false }; return true })
+            if (state.value[action.payload.id].items.filter(
+                item => {
+                    if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size && item.count === 0) return true;
+                }).length !== 0) {
+                state.value[action.payload.id].items = state.value[action.payload.id].items.filter(
+                    item => {
+                        if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size) return false;
+                        return true;
+                    })
             }
-
             state.totalPrice -= action.payload.price;
             state.itemsCount--;
         },
         deleteAllPizza(state, action) {
-            if (state.value[action.payload.id].items.filter(item => { if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size && item.count > 0) return true }).length !== 0) {
-                state.value[action.payload.id].items.map(item => { if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size) { state.totalPrice -= Math.ceil(item.price * (item.count)); state.itemsCount -= item.count; return item.count = 0 } return item });
+            if (state.value[action.payload.id].items.filter(
+                item => { if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size && item.count > 0) return true }).length !== 0) {
+                state.value[action.payload.id].items.map(
+                    item => {
+                        if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size) {
+                            state.totalPrice -= (item.price * item.count);
+                            state.itemsCount -= item.count;
+                            return item.count = 0
+                        }
+                        return item;
+                    });
                 state.value[action.payload.id].totalCount--;
             }
-            if (state.value[action.payload.id].items.filter(item => { if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size && item.count === 0) return true }).length !== 0) {
-                state.value[action.payload.id].items = state.value[action.payload.id].items.filter(item => { if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size) { return false }; return true })
+            if (state.value[action.payload.id].items.filter(
+                item => {
+                    if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size && item.count === 0) return true;
+                }).length !== 0) {
+                state.value[action.payload.id].items = state.value[action.payload.id].items.filter(
+                    item => {
+                        if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size) return false;
+                        return true;
+                    })
             }
         },
     }
@@ -143,3 +155,50 @@ export default configureStore({
 })
 
 
+
+
+
+
+
+
+// addPizza(state, action) {
+//     if (state.value[action.payload.id] === undefined) state.value[action.payload.id] = { items: [], totalCount: 0 };
+//     if (state.value[action.payload.id].items.filter(
+//         item => { if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size) return true }).length !== 0) {
+//         state.value[action.payload.id].items.map(
+//             item => {
+//                 if (item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size) return ++item.count;
+//                 return item;
+//             });
+//         state.value[action.payload.id].totalCount++;
+//     }
+//     else {
+//         switch (action.payload.size) {
+//             case 30:
+//                 state.value[action.payload.id].items.push({ ...action.payload, price: Math.ceil(action.payload.price * 1.2) });
+//                 break;
+
+//             case 40:
+//                 state.value[action.payload.id].items.push({ ...action.payload, price: Math.ceil(action.payload.price * 1.5) });
+//                 break;
+//             default:
+//                 state.value[action.payload.id].items.push({ ...action.payload });
+//                 break;
+//         }
+
+//         state.value[action.payload.id].totalCount++;
+//     }
+//     switch (action.payload.size) {
+//         case 30:
+//             state.totalPrice += Math.ceil(action.payload.price * 1.2);
+//             break;
+//         case 40:
+//             state.totalPrice += Math.ceil(action.payload.price * 1.5);
+//             break;
+
+//         default:
+//             state.totalPrice += Math.ceil(action.payload.price);
+//             break;
+//     }
+//     state.itemsCount++;
+// },
