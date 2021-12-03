@@ -17,7 +17,7 @@ function Cart() {
     }
 
     const clearAllCart = () => {
-        dispatch(clearCart());
+        if (window.confirm('Вы действительно хотите удалить все пиццы из корзины?')) dispatch(clearCart());
     }
 
     const addPizzaToCart = (pizza) => {
@@ -80,10 +80,6 @@ function Cart() {
                 {(itemsCount === 0) &&
                     <div class="cart cart--empty">
                         <h2>Корзина пустая <icon>😕</icon></h2>
-                        <p>
-                            Вероятней всего, вы не заказывали ещё пиццу.<br />
-                            Для того, чтобы заказать пиццу, перейди на главную страницу.
-                        </p>
                         <img src={cartImage} alt="Empty cart" />
                         <Link to="/" class="button button--black">
                             <span>Вернуться назад</span>
