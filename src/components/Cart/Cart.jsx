@@ -79,7 +79,7 @@ function Cart() {
 
                 {(itemsCount === 0) &&
                     <div class="cart cart--empty">
-                        <h2>Корзина пустая <icon>😕</icon></h2>
+                        <h2>Корзина пустая:(</h2>
                         <img src={cartImage} alt="Empty cart" />
                         <Link to="/" class="button button--black">
                             <span>Вернуться назад</span>
